@@ -44,7 +44,7 @@ order_reviews_schema = StructType([
     StructField('review_answer_timestamp',TimestampType(),True)
 ])
 
-order_schema = StructType([
+orders_schema = StructType([
     StructField('order_id',StringType(),False),
     StructField('customer_id',StringType(),False),
     StructField('order_status',StringType(),True),
