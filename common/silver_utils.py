@@ -22,8 +22,10 @@ def clean_silver_table(spark,table_name,config, catalog="ecommerce_lakehouse"):
           .filter(F.col('rn')==1).drop('rn'))
 
     reject_expr = F.lit(None).cast('string')
-    for condition,reason in reversed(config['rules']):
-        reject_expr = F.when(condition,F.lit(reason)).otherwise(reject_expr)
+    rules = config.get('rules', [])
+
+    for condition, reason in reversed(rules):
+        reject_expr = F.when(condition, F.lit(reason)).otherwise(reject_expr)
 
     df_checked = (df.withColumn('_reject_reason',reject_expr).withColumn('_is_valid',F.col('_reject_reason').isNull()))
 
