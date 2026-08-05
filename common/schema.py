@@ -12,7 +12,7 @@ geolocation_schema = StructType([
     StructField('geolocation_zip_code_prefix',IntegerType(),False),
     StructField('geolocation_lat',DoubleType(),True),
     StructField('geolocation_lng',DoubleType(),True),
-    StructField('geolacation_city',StringType(),True),
+    StructField('geolocation_city',StringType(),True),
     StructField('geolocation_state',StringType(),True)
 ])
 
