@@ -30,7 +30,8 @@ SILVER_RULES = {
         'pre_transform' : [
             agg_geolocations,
             lambda df,spark : df.withColumn('geolacation_city',F.trim(F.lower(F.col('geolocation_city'))))
-        ]
+        ],
+        'rules' : []
     },
 
     'order_items' : {
@@ -64,7 +65,7 @@ SILVER_RULES = {
     },
 
     'orders' : {
-        'dedip_keys' : ['order_id'],
+        'dedup_keys' : ['order_id'],
         'pre_transform' : [
             lambda df,spark : df.withColumn('order_status',F.trim(F.lower(F.col('order_status'))))
         ],
@@ -78,8 +79,9 @@ SILVER_RULES = {
         'dedup_keys' : ['product_id'],
         'pre_transform' : [
             lambda df,spark : df.withColumn('product_category_name',F.trim(F.lower(F.col('product_category_name')))),
-        translate_product_category
-    ]
+            translate_product_category
+        ],
+        'rules': []
     },
 
     'sellers' : {
