@@ -2,7 +2,7 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 
 customer_schema = StructType([
     StructField('customer_id',StringType(),False),
-    StructField('customer_unique_id',StringType(),False),
+    StructField('customer_unique_id',StringType(),True),
     StructField('customer_zip_code_prefix',IntegerType(),True),
     StructField('customer_city',StringType(),True),
     StructField('customer_state',StringType(),True)
@@ -19,8 +19,8 @@ geolocation_schema = StructType([
 order_items_schema = StructType([
     StructField('order_id',StringType(),False),
     StructField('order_item_id',IntegerType(),False),
-    StructField('product_id',StringType(),False),
-    StructField('seller_id',StringType(),False),
+    StructField('product_id',StringType(),True),
+    StructField('seller_id',StringType(),True),
     StructField('shipping_limit_date',TimestampType(),True),
     StructField('price',FloatType(),True),
     StructField('freight_value',FloatType(),True)
@@ -36,7 +36,7 @@ order_payments_schema = StructType([
 
 order_reviews_schema = StructType([
     StructField('review_id',StringType(),False),
-    StructField('order_id',StringType(),False),
+    StructField('order_id',StringType(),True),
     StructField('review_score',IntegerType(),True),
     StructField('review_comment_title',StringType(),True),
     StructField('review_comment_message',StringType(),True),
@@ -46,7 +46,7 @@ order_reviews_schema = StructType([
 
 orders_schema = StructType([
     StructField('order_id',StringType(),False),
-    StructField('customer_id',StringType(),False),
+    StructField('customer_id',StringType(),True),
     StructField('order_status',StringType(),True),
     StructField('order_purchase_timestamp',TimestampType(),True),
     StructField('order_approved_at',TimestampType(),True),
@@ -69,7 +69,7 @@ products_schema = StructType([
 
 sellers_schema = StructType([
     StructField('seller_id',StringType(),False),
-    StructField('seller_zip_code_prefix',IntegerType(),False),
+    StructField('seller_zip_code_prefix',IntegerType(),True),
     StructField('seller_city',StringType(),True),
     StructField('seller_state',StringType(),True)
 ])
