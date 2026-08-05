@@ -35,6 +35,8 @@ def clean_silver_table(spark,table_name,config, catalog="ecommerce_lakehouse"):
 
     (valid_df.drop("_reject_reason", "_is_valid").write.format("delta").mode("overwrite").saveAsTable(f"{catalog}.silver.{table_name}"))
 
+    write_rejects(invalid_df, table_name)
+
     valid_count, invalid_count = valid_df.count(), invalid_df.count()
     print(f"{table_name}: {valid_count} valid, {invalid_count} rejected")
     return valid_count, invalid_count

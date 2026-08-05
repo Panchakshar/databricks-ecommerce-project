@@ -10,7 +10,7 @@ def translate_product_category(df, spark):
     
 def agg_geolocations(df, spark):
     # collapses heavy zip-level duplication instead of just deduping
-    return (df.groupBy('geolocation_zip_code_prefix').agg(F.round(F.avg('geolocation_lat'),5).alias('geolocation_lat'),F.round(F.avg('geolocation_lng'),5).alias('geolocation_lng'),F.first('geolocation_city').alias('geolocation_city'),F.first('geolocation_state').alias('geolocation_state'),F.max('_load_timestamp').alias('_load_timestamp'),F.first('_file_name').alias('_file_name')))
+    return (df.groupBy('geolocation_zip_code_prefix').agg(F.round(F.avg('geolocation_lat'),5).alias('geolocation_lat'),F.round(F.avg('geolocation_lng'),5).alias('geolocation_lng'),F.first('geolacation_city').alias('geolacation_city'),F.first('geolocation_state').alias('geolocation_state'),F.max('_load_timestamp').alias('_load_timestamp'),F.first('_file_name').alias('_file_name')))
 
 
 SILVER_RULES = {
@@ -29,7 +29,7 @@ SILVER_RULES = {
         'dedup_keys' : ['geolocation_zip_code_prefix'],
         'pre_transform' : [
             agg_geolocations,
-            lambda df,spark : df.withColumn('geolacation_city',F.trim(F.lower(F.col('geolocation_city'))))
+            lambda df,spark : df.withColumn('geolacation_city',F.trim(F.lower(F.col('geolacation_city'))))
         ],
         'rules' : []
     },
